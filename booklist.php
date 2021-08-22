@@ -32,7 +32,7 @@ include 'nav.php';
     <?php
 include "dbcon.php";
 
-   $selQuery = "Select * from `listbook`";
+   $selQuery = "Select * from `booklist`";
    $query=mysqli_query($con,$selQuery);
     
    while($res=mysqli_fetch_array($query)){

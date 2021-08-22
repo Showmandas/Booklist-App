@@ -23,7 +23,7 @@ include 'nav.php';
 <?php
 include "dbcon.php";
 $id=$_GET['id'];
-  $selQuery = "Select * from `listbook`";
+  $selQuery = "Select * from `booklist`";
    $query=mysqli_query($con,$selQuery);
  $res=mysqli_fetch_array($query);
 if(isset($_POST['save'])){
@@ -33,7 +33,7 @@ if(isset($_POST['save'])){
    $author=$_POST['author'];
    $isbn=$_POST['isbn'];
 
-   $updateQuery = "update listbook set id=$id,title='$title',author='$author',isbn='$isbn' where id=$id ";
+   $updateQuery = "update booklist set id=$id,title='$title',author='$author',isbn='$isbn' where id=$id ";
    $query=mysqli_query($con,$updateQuery);
 
    if($query){

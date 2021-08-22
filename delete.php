@@ -2,7 +2,7 @@
 include 'dbcon.php';
 $id=$_GET['id'];
 
-$delquery="delete from `listbook` where id=$id";
+$delquery="delete from `booklist` where id=$id";
 
 $del=mysqli_query($con,$delquery);
 

@@ -6,7 +6,7 @@ if(isset($_POST['save'])){
    $author=$_POST['author'];
    $isbn=$_POST['isbn'];
 
-   $insertQuery = "Insert INTO `listbook`(`title`,`author`,`isbn`) VALUES('$title','$author','$isbn')";
+   $insertQuery = "Insert INTO `booklist`(`title`,`author`,`isbn`) VALUES('$title','$author','$isbn')";
    $query=mysqli_query($con,$insertQuery);
 
    if($query){

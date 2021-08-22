@@ -29,7 +29,7 @@ include 'nav.php';
 
 <h2 class="text-left">Enter Book Info</h2>
 <div class="row m-auto">
-<div class="col-6 col-lg-6  bookform">
+<div class="col col-md-6 col-lg-6  bookform">
 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']);?>" method="post">
   <div class="form-group">
     <label for="title">Book Title</label>
@@ -48,7 +48,7 @@ include 'nav.php';
   <button type="submit" class="btn btn-primary" name="save">Save</button>
 </form>
 </div><!--/bookform-->
-<div class="col-6 col-lg-6 image">
+<div class="col col-md-6 col-lg-6 image">
 <img src="images/img.png" alt="cartoon_man" class="img-fluid">
 </div><!--/image-->
 </div><!---/row-->
