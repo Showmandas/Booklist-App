@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
 </head>
-<body>
+<body style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.3), rgba(117, 19, 93, 0.6)),
+    url('images/bgimg.jpg');">
 <div class="wrapper container">
 <?php
 include 'nav.php';
@@ -22,18 +23,38 @@ include 'nav.php';
 <div class="col-12 col-lg-6 bookform">
 <?php
 include "dbcon.php";
-$id=$_GET['id'];
-  $selQuery = "Select * from `booklist`";
-   $query=mysqli_query($con,$selQuery);
- $res=mysqli_fetch_array($query);
+$ids=$_GET['id'];
+  $showQuery = "Select * from `booklists` where id={$ids}";
+   $showdata=mysqli_query($con,$showQuery);
+ $arrdata=mysqli_fetch_array($showdata);
 if(isset($_POST['save'])){
 
-    $id=$_GET['id'];
+    
    $title=$_POST['title'];
    $author=$_POST['author'];
-   $isbn=$_POST['isbn'];
+   $pub=$_POST['pub'];
+   $edition=$_POST['edition'];
+   $files=$_FILES['pdf'];
+   $pdf_name=$files['name'];
+   $pdf_error=$files['error'];
+   $pdf_tmp=$files['tmp_name'];
 
-   $updateQuery = "update booklist set id=$id,title='$title',author='$author',isbn='$isbn' where id=$id ";
+   $pdftxt=explode('.',$pdf_name);
+   $pdfcheck=strtolower(end($pdftxt));
+   $fileExt=array('png','txt','jpg','jpeg');
+
+   if(in_array($pdfcheck,$fileExt)){
+       ?>
+       <script>
+          alert('Only pdf can be uploaded!');
+       </script>
+       <?php
+   }else{
+      $pdfStore='bookspdf/'.$pdf_name;
+      move_uploaded_file($pdf_tmp,$pdfStore);
+
+
+   $updateQuery = "update booklists set id=$ids,title='$title',author='$author',publication='$pub',edition='$edition',files='$pdfStore' where id=$id ";
    $query=mysqli_query($con,$updateQuery);
 
    if($query){
@@ -53,25 +74,37 @@ alert('Sorry!something went wrong!')
 ?>
 <?php
 }
+}
 ?>
 
 
 
-<form method="post">
+<form  method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label for="title">Book Title</label>
-    <input type="text" class="form-control" value="<?php echo $res['title']; ?>" placeholder="Enter Book Title" id="title" name="title">
+    <input type="text" class="form-control" value="<?php echo $arrdata['title']; ?>" placeholder="Enter Book Title" id="title" name="title">
   </div>
   <div class="form-group">
     <label for="athor">Author </label>
-    <input type="text" class="form-control" value="<?php echo $res['author']; ?>"  placeholder="Enter Author Name" id="author" name="author">
+    <input type="text" class="form-control" value="<?php echo $arrdata['author']; ?>"  placeholder="Enter Author Name" id="author" name="author">
   </div>
-  
+    
   <div class="form-group">
-    <label for="isbn">ISBN:</label>
-    <input type="number" class="form-control" value="<?php echo $res['isbn']; ?>"  placeholder="Enter ISBN Number" id="isbn" name="isbn">
+    <label for="publication">Publication:</label>
+    <input type="text" class="form-control" value="<?php echo $arrdata['publication']; ?>"  placeholder="Enter Publisher name" id="pub" name="pub" required>
   </div>
-  
+  <div class="form-group">
+    <label for="edition">Edition:</label>
+    <input type="text" class="form-control" placeholder="Enter Edition" value="<?php echo $arrdata['edition']; ?>"  id="edition" name="edition" required>
+  </div>
+  <div class="form-group">
+    
+    <label for="files">You can upload your book's pdf file here: </label>
+    <input type="file" class="form-control" id="pdf" name="pdf" value="<?php echo $arrdata['files']; ?>"  required>
+
+    
+      </div>
+
   <button type="submit" class="btn btn-primary" name="save">Save Changes</button>
 </form>
 </div><!--/bookform-->
@@ -91,6 +124,16 @@ alert('Sorry!something went wrong!')
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+ $(document).ready(function(){
+  $("#selector").change(function(){
+      $("body").toggleClass("bg-dark");
+      $("nav").toggleClass("navbar-dark bg-dark");
+      $(".jumbotron").toggleClass("bg-secondary text-white");
+      $(".footer").toggleClass("bg-dark text-white");
+});
+ });
+ </script>
 
 </body>
 </html>

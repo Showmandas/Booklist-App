@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book List</title>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
-</head>
-<body>
-
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+    header('location:login.php');
+  }
+  
+?>
 
 <nav class="navbar navbar-expand-md navbar-dark" style=" background: rgba(120,20,20,0.7);">
   <!-- Brand -->
@@ -27,9 +21,14 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link text-light" href="booklist.php">Show Booklist &nbsp;<i class="fa fa-book" aria-hidden="true"></i>
+        <a class="nav-link text-light" href="booklist.php">Show Booklist &nbsp;
 </a>
       </li>
+<li class="nav-item">
+
+<a href="searchbook.php" class="nav-link text-light">Search  here your books...</a>
+</li>
+
     </ul>
    <ul class="navbar-nav ml-auto px-5">
    <li class="nav-item text-light">
@@ -38,13 +37,21 @@
   <input type="checkbox" class="my-2" id="selector">
 </div>
       </li>
-      <li class="nav-item ml-5">
-      <a href='signup.php' class="btn btn-primary">Sign up</a>
-<a href="login.php" class="btn btn-secondary">Log in</a>
+      <li class="nav-item ml-5 text-light">
+<?php
+if(isset($_SESSION['username'])){
+
+  ?>    
+  <a class="nav-link text-light" href="profile.php"><?php echo $_SESSION['username'];?>&nbsp;<i class="fa fa-user-circle" aria-hidden="true"></i></a>
+
+<?php
+}
+?>
+</li>
+    <li class="nav-item ml-5 text-light">
+        <a class="nav-link text-light" href="logout.php">Logout</a>
+    
       </li>
     </ul>
   </div>
 </nav>
-
-</body>
-</html>
