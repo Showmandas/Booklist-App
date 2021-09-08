@@ -8,11 +8,22 @@ $getname=$_SESSION['username'];
 // echo $getid;
 // echo $getname;
 
-$dupselq="select * from `addbook` where bookid=$getid";
-$dup=mysqli_query($con,$dupselq);
-if($dup){
+$dupselq="select * from `addbook` where username='$getname'";
+$dup= mysqli_query($con,$dupselq);
+$condi = null;
+if (mysqli_num_rows($dup) >0 ) {
+   while($res = mysqli_fetch_assoc($dup)){
+       if ($res["bookid"] == $getid) {
+          $condi = true;
+       }
+   }
+}
+if($condi){
 ?>
-<script>alert('already exist!')</script>
+   <script>
+   alert('already exist!')
+   location.replace('booklist.php');
+   </script>
 <?php
 }else{
 

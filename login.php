@@ -31,7 +31,7 @@ if(isset($_POST['login'])){
             </script>
             
             <?php
-            header('Location: user/index.php?username='.$_SESSION['username']);
+            header('Location: user/index.php');
             ?>
             <!-- <script>
                 location.replace('user/index.php');

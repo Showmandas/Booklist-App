@@ -33,9 +33,10 @@ if(isset($_POST['save'])){
 ?>
 <script>
 alert('Your Book has been added');
+location.replace('yourBooks.php');
 </script>
 <?php
-header('Location: yourBooks.php');
+// header('');
    }else{
 ?>
 <script>

@@ -61,9 +61,10 @@ if(isset($_POST['save'])){
 ?>
 <script>
 alert('Your data has been Updated Successfully!');
+location.replace('yourbooks.php');
 </script>
 <?php
-// header('location:booklist.php');
+// header('');
    }else{
 ?>
 <script>
