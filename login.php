@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if(isset($_SESSION['username'])){
+    header('location:login.php');
+  }
+
 ?>
 
 <?php
@@ -26,10 +31,11 @@ if(isset($_POST['login'])){
             </script>
             
             <?php
+            header('Location: user/index.php?username='.$_SESSION['username']);
             ?>
-            <script>
-                location.replace('index.php');
-            </script>
+            <!-- <script>
+                location.replace('user/index.php');
+            </script> -->
             <?php
         }else{
             ?>

@@ -35,7 +35,7 @@ if(isset($_POST['signup'])){
     }else{
         if($password === $conpass){
 
-            $insertQuery="insert into signup(username,email,password,cpassword,address,division,gender) values('$username','$email','$pass','$cpass','$address','$division','$gender')";
+            $insertQuery="insert into signup(username,email,password,address,division,gender) values('$username','$email','$pass','$address','$division','$gender')";
             $insq=mysqli_query($con,$insertQuery);
             if($insq){
                 ?>
