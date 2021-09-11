@@ -1,5 +1,6 @@
 
 
+
 <?php
 include 'dbcon.php';
 
@@ -19,6 +20,7 @@ if(isset($_POST['signup'])){
     $address=htmlentities($_POST['address']);
     $division=htmlentities($_POST['division']);
     $gender=htmlentities($_POST['gender']);
+
     
     $pass=password_hash($password,PASSWORD_BCRYPT);
     $cpass=password_hash($conpass,PASSWORD_BCRYPT);
@@ -26,6 +28,8 @@ if(isset($_POST['signup'])){
     $query=mysqli_query($con,$emailquery);
     $emailcount=mysqli_num_rows($query);
     
+    pass_verify($password);
+
     if($emailcount > 0){
         ?>
         <script>
@@ -33,45 +37,62 @@ if(isset($_POST['signup'])){
         </script>
         <?php
     }else{
-        if($password === $conpass){
+        
+        if ($passVerifyData == true) {
+            
+            if($password === $conpass){
 
-            $insertQuery="insert into signup(username,email,password,address,division,gender) values('$username','$email','$pass','$address','$division','$gender')";
-            $insq=mysqli_query($con,$insertQuery);
-            if($insq){
-                ?>
-                <script>
-                    alert('Registered successfully!');
-                </script>
-                <?php
-                ?>
-                <script>
-                    location.replace('login.php');
-                </script>
-                <?php
+                $insertQuery="insert into signup(username,email,password,address,division,gender) values('$username','$email','$pass','$address','$division','$gender')";
+                $insq=mysqli_query($con,$insertQuery);
+                if($insq){
+                    ?>
+                    <script>
+                        alert('Registered successfully!');
+                    </script>
+                    <?php
+                    ?>
+                    <script>
+                        location.replace('login.php');
+                    </script>
+                    <?php
+                }else{
+                    ?>
+                    <script>
+                        alert('Not inserted!');
+                    </script>   
+                    
+                    <?php
+
+                }
+                
             }else{
                 ?>
                 <script>
-                    alert('Not inserted!');
-                </script>   
-                
+                    alert('Password  is not matching!');
+                </script>
                 <?php
-
             }
-            
+
         }else{
             ?>
             <script>
-                alert('Password  is not matching!');
+                 alert('password must be at least 6 characters');
             </script>
             <?php
+
         }
     }
 
 
     }
     
-    
-
+function pass_verify($data){
+    if (strlen($data) >= 6) {
+        $GLOBALS['passVerifyData'] = true; 
+    }else{
+        $GLOBALS['passVerifyData'] = false;
+    }
+}
 
 
 
@@ -127,7 +148,7 @@ if(isset($_POST['signup'])){
   
   <div class="form-group">
     <label for="exampleInputCity">Division</label>
-    <select name="division" id="division" class="form-control" required>
+    <select name="division" id="division" class="form-control" >
     <option value="">---Select your division---</option>
         <option value="Dhaka">Dhaka</option>
         <option value="Chattogram">Chattogram</option>
@@ -142,9 +163,9 @@ if(isset($_POST['signup'])){
   </div>
   <div class="form-group p-1">
     <label for="exampleInputAddress">Gender: </label>
-<input type="radio" name="gender" value="male">Male
-<input type="radio" name="gender" value="female">Female
-<input type="radio" name="gender" value="other">Other   
+<input type="radio" name="gender" value="male" required>Male
+<input type="radio" name="gender" value="female" required>Female
+<input type="radio" name="gender" value="other" required>Other   
   </div>
   <!-- <div class="form-group">
     <label for="exampleInputAddress">Date Of Registration</label>

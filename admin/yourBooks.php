@@ -59,7 +59,7 @@ if(mysqli_num_rows($q_run)>0){
             <td><a href="download.php?file=pdf/.<?php echo $resShow['files']; ?>" name="download">Click Here</a>
             <td> <a href="update.php?id=<?php echo $resShow['id'];?>" class="btn btn-success text-light"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
            </a> </td>
-            <td> <a href="delete.php?id=<?php echo $resShow['id'];?>" class="btn btn-danger text-light"><i class="fa fa-trash" aria-hidden="true"></i>
+            <td> <a href="recdelete.php?id=<?php echo $resShow['id'];?>" class="btn btn-danger text-light"><i class="fa fa-trash" aria-hidden="true"></i>
            </a> </td>
            </tr>
       <?php

@@ -74,6 +74,23 @@ if(isset($_POST['login'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
 
+
+    <style>
+        .eye{
+            position: relative;
+        }
+        #hide1{
+            display:none;
+
+        }
+        #hide1,#hide2{
+            position: absolute;
+            top:-25px;
+            left:50px;
+            transform:translate(300px,0px);
+        }
+    </style>
+
 </head>
 <body  style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.3), rgba(117, 19, 93, 0.6)),
     url('images/bgimg.jpg');">
@@ -95,18 +112,48 @@ if(isset($_POST['login'])){
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" name="pass" id="password" placeholder="Password">
+    <span class="eye" onclick="myfun()">
+    <i class="fa fa-eye" id="hide1"></i>
+    <i class="fa fa-eye-slash" id="hide2"></i>
+    </span>
   </div>
   
   <button type="submit" class="btn btn-primary" name="login">Log in</button>
   <p class="mt-4">Not have an account?<a href="signup.php" class="text-decoration-none">Sign up here</a></p>
 </form>
-
+<!-- <a href="admin/login.php">Log in as Admin</a> -->
     </div><!--/card-->
 
         </div><!--/col-->
        </div><!--/row-->
     
 </div>    <!---/container-->
+
+
+
+
+<script>
+
+    function myfun(){
+       var x=document.getElementById('password');
+       var h1=document.getElementById('hide1');
+       var h2=document.getElementById('hide2');
+
+       if(x.type === 'password'){
+           x.type="text";
+           h1.style.display="block";
+           h2.style.display="none";
+       }else{
+           x.type="password";
+           h1.style.display="none";
+           h2.style.display="block";
+           
+       }
+   }
+ 
+
+</script>
+
 </body>
 </html>
 

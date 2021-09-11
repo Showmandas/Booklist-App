@@ -31,7 +31,7 @@ if(!isset($_SESSION['username'])){
 </li>
 <li class="nav-item">
 
-<a href="yourBooks.php" class="nav-link text-light">Your Books</a>
+<a href="yourBooks.php" class="nav-link text-light">My Books</a>
 </li>
 
     </ul>

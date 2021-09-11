@@ -20,7 +20,7 @@ include 'dbcon.php';
 
 </head>
 <body  style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.3), rgba(117, 19, 93, 0.6)),
-    url('images/bgimg.jpg');">
+    url('../images/bgimg.jpg');">
     <div class="container mt-5 my-5">
         <?php include 'nav.php';?>
         <div class="row mt-5 pt-4">
@@ -32,7 +32,7 @@ include 'dbcon.php';
     <div class="card-body text-center">
         <h3 class="border text-success">Your Basic info</h3>
         <?php
-        $q=mysqli_query($con,"select * from signup where username='$_SESSION[username]' ;"); 
+        $q=mysqli_query($con,"select * from signup where username='$_SESSION[username]';"); 
         ?>
         <div class="username">
             <label>Your Name: </label>
@@ -84,7 +84,7 @@ include 'dbcon.php';
         
 
     </div><!--/card-body-->
-    <a class="btn btn-primary" href="updateprofile.php">Edit profile</a>    
+    <a class="btn btn-primary" href="updateprofile.php?id=<?php echo $row['id']; ?>">Edit profile</a>    
                 </div><!--/card-->
             
             </div><!---/col-->

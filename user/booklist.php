@@ -59,14 +59,9 @@ $username= $_SESSION['username'];
 if(isset($_GET['sort_alphabet'])){
   if($_GET['sort_alphabet']=="title"){
     $sort_option="ASC";
-      }elseif($_GET['sort_alphabet']=="author"){
-        $sort_option="DESC";
-      }elseif($_GET['sort_alphabet']=="publication"){
-        $sort_option="ASC";
-      }elseif($_GET['sort_alphabet']=="edition"){
+      }else{
         $sort_option="DESC";
       }
-    
 }
 $query="select * from booklists where username='$username' order by  title $sort_option";
 $q_run=mysqli_query($con,$query);
@@ -96,10 +91,10 @@ if(mysqli_num_rows($q_run)>0){
       
 }else{
   ?>
-  <script>
-alert("No record found");
+    <script>
+alert("User Record Not found!");
   </script>
-  
+
   <?php
 }
 
@@ -116,6 +111,10 @@ if(mysqli_num_rows($req)>0){
     $fq=mysqli_fetch_array($qsel);
     // echo $fq['author'];
 
+    if(isset($fq)){
+
+    
+
     
     ?>
    <tr>
@@ -127,13 +126,14 @@ if(mysqli_num_rows($req)>0){
             <td><?php echo $fq['publication'];?></td>
             <td><?php echo $fq['edition'];?></td>
 
-            <td><a href="#" name="download">Click Here</a></td>
+            <td><a href="download.php?file=pdf/.<?php echo $fq['files']; ?>" name="download">Click Here</a></td>
             <td> <a href="#" class="btn btn-success text-light"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
            </a> </td>
             <td> <a href="#" class="btn btn-danger text-light"><i class="fa fa-trash" aria-hidden="true"></i>
            </a> </td>
            </tr>
  <?php
+    }
   }
 }
  ?>

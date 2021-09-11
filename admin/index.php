@@ -43,7 +43,9 @@ include 'nav.php';
   <option value="title" <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet']=='title'){echo 'selected';}?> >Title</option>
   <option value="author" <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet']=='author'){echo 'selected';}?> >Author</option>
   <option value="publication" <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet']=='publication'){echo 'selected';}?> >Publication</option>
-  </select>            
+  <option value="edition" <?php if(isset($_GET['sort_alphabet']) && $_GET['sort_alphabet']=='edition'){echo 'selected';}?> >Edition</option>
+
+</select>            
 <button type='submit' class="input-group-text btn btn-primary">Sort</button>
   </div><!--/input-group-->
 
@@ -70,11 +72,15 @@ $sort_option="";
 if(isset($_GET['sort_alphabet'])){
   if($_GET['sort_alphabet']=="title"){
 $sort_option="ASC";
-  }elseif($_GET['sort_alphabet']=="author"){
-    $sort_option="DESC";
+  }else{
+    if($_GET['sort_alphabet']=="author"){
+    $sort_option="ASC";
   }elseif($_GET['sort_alphabet']=="publication"){
     $sort_option="ASC";
+  }elseif($_GET['sort_alphabet']=="edition"){
+    $sort_option="ASC";
   }
+}
 
 }
 $username= $_SESSION['username'];

@@ -57,16 +57,19 @@ $sort_option="";
 if(isset($_GET['sort_alphabet'])){
   if($_GET['sort_alphabet']=="title"){
 $sort_option="ASC";
-  }elseif($_GET['sort_alphabet']=="author"){
-    $sort_option="DESC";
+  }else{
+    if($_GET['sort_alphabet']=="author"){
+    $sort_option="ASC";
   }elseif($_GET['sort_alphabet']=="publication"){
     $sort_option="ASC";
-  }elseif($_GET['sort_alphabet']=="edition"){
-    $sort_option="DESC";
   }
+  elseif($_GET['sort_alphabet']=="edition"){
+    $sort_option="ASC";
+  }
+}
 
 }
-$sortquery="select * from booklists order by title $sort_option";
+$sortquery="select * from booklists order by title,author,publication $sort_option";
 $q_run=mysqli_query($con,$sortquery);
 
 if(mysqli_num_rows($q_run)>0){

@@ -30,12 +30,13 @@ if(isset($_POST['save'])){
       $pdfStore='../pdf/'.$pdf_name;
       move_uploaded_file($pdf_tmp,$pdfStore);
       // $username=$_GET['username'];
-$dupselq="select * from `booklists` where files=$files";
+$dupselq="select * from `booklists` where  title='$title'";
       $dup=mysqli_query($con,$dupselq);
-if($dup){
+$rows=mysqli_num_rows($dup);
+      if($rows){
    ?>
    <script>
-   alert('already exist!');
+   alert('Book title will not be same!');
 location.replace('index.php');
 </script>
    <?php
