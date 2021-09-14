@@ -1,7 +1,12 @@
 
 <?php
-// session_start();
+ 
 include 'insert.php';
+
+
+
+?>
+
 
 ?>
 

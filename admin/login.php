@@ -28,6 +28,7 @@ if(isset($_POST['login'])){
             </script>
             
             <?php
+            // $_SESSION['login']=true;
             header('Location: index.php');
             ?>
             <!-- <script>
